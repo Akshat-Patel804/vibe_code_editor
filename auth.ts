@@ -5,6 +5,8 @@ import authConfig from "./auth.config"
 import { getUserById } from "./modules/auth/actions"
  
 export const { handlers, signIn, signOut, auth } = NextAuth({
+
+
   callbacks:{
     async signIn({user,account}){
       if(!user || !account) return false;
@@ -93,6 +95,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }
   },
   secret:process.env.AUTH_SECRET,
-  adapter:PrismaAdapter(db),
+    adapter: PrismaAdapter(db),
+    session: { strategy: "jwt" },
   ...authConfig
 })
