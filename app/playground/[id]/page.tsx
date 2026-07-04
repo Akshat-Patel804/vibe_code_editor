@@ -26,6 +26,8 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
+import PlaygroundEditor from "@/modules/playground/components/playground-editor";
 
 const MainPlayGroundPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -203,7 +205,18 @@ const MainPlayGroundPage = () => {
                     </div>
                     </Tabs>
                   </div>
-                  <div>{activeFile?.content}</div>
+                  <div className="flex-1">
+                    <ResizablePanelGroup className="h-full">
+                        <ResizablePanel defaultSize={isPreviewVisible ? 50 : 100}>
+                          <PlaygroundEditor 
+                          activeFile={activeFile} 
+                          content={activeFile?.content || ""}
+                          onContentChange={()=>{}}
+
+                          />
+                        </ResizablePanel>
+                    </ResizablePanelGroup>
+                  </div>
                 </div>
               ):(  
               <div className="flex flex-col h-full items-center justify-center text-muted-foreground gap-4">
