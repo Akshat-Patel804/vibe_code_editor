@@ -18,6 +18,7 @@ import { usePlayground } from "@/modules/playground/hooks/usePlayground";
 import { useFileExplorer } from "@/modules/playground/hooks/useFileExplorer";
 import { TemplateFileTree } from "@/modules/playground/components/playground-explorer";
 import { TemplateFile, TemplateFolder } from "@/modules/playground/lib/path-to-json";
+import WebContainerPreview from "@/modules/webcontainers/components/webcontainer-preview";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -26,8 +27,9 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import PlaygroundEditor from "@/modules/playground/components/playground-editor";
+import { useWebContainer } from "@/modules/webcontainers/hooks/useWebContainer";
 
 const MainPlayGroundPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -54,6 +56,15 @@ const MainPlayGroundPage = () => {
     setOpenFiles,
   } = useFileExplorer();
 
+  const {
+    serverUrl,
+    isLoading:containerLoading,
+    error:containerError,
+    instance,
+    writeFileSync 
+    // @ts-ignore
+  } = useWebContainer({templateData})
+ 
   useEffect(() => {
     setPlaygroundId(id);
   }, [id, setPlaygroundId]);
@@ -215,6 +226,24 @@ const MainPlayGroundPage = () => {
 
                           />
                         </ResizablePanel>
+                        {
+                          isPreviewVisible && (
+                            <>
+                              <ResizableHandle />
+                              <ResizablePanel defaultSize={50} >
+                                <WebContainerPreview
+                                  templateData={templateData}
+                                  instance={instance}
+                                  writeFileSync={writeFileSync}
+                                  isLoading={containerLoading}
+                                  error={containerError}
+                                  serverUrl={serverUrl!}
+                                  forceResetup={false}
+                                />
+                              </ResizablePanel>
+                            </>
+                          )
+                        }
                     </ResizablePanelGroup>
                   </div>
                 </div>
