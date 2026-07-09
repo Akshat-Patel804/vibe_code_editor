@@ -332,70 +332,11 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
   }
   ```
 
-### Templates
-- `GET /api/template/[id]` - Fetch template by ID
-- Returns pre-configured project template with starter files
 
-## 📊 Database Schema
 
-### User Model
-```prisma
-model User {
-  id                String    @id @default(cuid())
-  name              String?
-  email             String    @unique
-  image             String?
-  role              UserRole  @default(USER)  // ADMIN, USER, PREMIUM_USER
-  accounts          Account[]
-  myPlayground      Playground[]
-  starredPlayground StarMark[]
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
-}
-```
 
 ### Playground Model (Projects)
 ```prisma
-model Playground {
-  id             String    @id @default(cuid())
-  title          String
-  description    String?
-  template       Templates @default(REACT)
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  userId         String
-  user           User      @relation(fields: [userId], references: [id])
-  starMarks      StarMark[]
-  templateFiles  TemplateFile[]
-}
-```
-
-### StarMark Model (Bookmarks)
-```prisma
-model StarMark {
-  id           String    @id @default(cuid())
-  userId       String
-  playgroundId String
-  isMarked     Boolean
-  user         User      @relation(fields: [userId], references: [id])
-  playground   Playground @relation(fields: [playgroundId], references: [id])
-}
-```
-
-### Account Model (OAuth)
-```prisma
-model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String  // github, google
-  providerAccountId String
-  refreshToken      String?
-  accessToken       String?
-  expiresAt         Int?
-  user              User    @relation(fields: [userId], references: [id])
-}
-```
 
 ## 🌐 Supported Languages & Templates
 
@@ -490,22 +431,6 @@ npm run build
 npm start
 ```
 
-### Deployment Options
-
-**Vercel (Recommended)**
-```bash
-npm install -g vercel
-vercel login
-vercel
-```
-
-**Docker**
-Create a `Dockerfile` for containerized deployment.
-
-**Traditional Hosting**
-- Build: `npm run build`
-- Start: `npm start`
-- Ensure environment variables are configured
 
 ### Performance Optimizations
 - ✅ Next.js React Compiler enabled
@@ -514,15 +439,7 @@ Create a `Dockerfile` for containerized deployment.
 - ✅ CSS optimization with Tailwind
 - ✅ Prisma Accelerate for edge functions
 
-## 🤝 Contributing
 
-Contributions are welcome! Please:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 ## 📝 License
 
@@ -539,13 +456,13 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - **Component Architecture**: Building scalable, reusable UI systems
 - **Performance Optimization**: Next.js best practices and optimization techniques
 
-## 📞 Contact & Links
+<!-- ## 📞 Contact & Links
 
 - **GitHub**: [yourusername](https://github.com/yourusername)
 - **LinkedIn**: [yourprofile](https://linkedin.com/in/yourprofile)
 - **Portfolio**: [yourportfolio.com](https://yourportfolio.com)
-- **Email**: your.email@example.com
+- **Email**: your.email@example.com -->
 
 ---
 
-**Made with ❤️ by [Your Name]**
+**Made with ❤️ by Akshat Patel**
