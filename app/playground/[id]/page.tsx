@@ -33,10 +33,11 @@ import { useWebContainer } from "@/modules/webcontainers/hooks/useWebContainer";
 import LoadingStep from "@/modules/playground/components/loader";
 import { findFilePath } from "@/modules/playground/lib";
 import { toast } from "sonner";
+import ToggleAI from "@/modules/playground/components/toggle-ai";
 
 const MainPlayGroundPage = () => {
   const { id } = useParams<{ id: string }>();
-  const [isPreviewVisible,setIsPreviewVisible] = useState(false);
+  const [isPreviewVisible,setIsPreviewVisible] = useState(true);
 
   const {
     playgroundData,
@@ -398,6 +399,11 @@ const MainPlayGroundPage = () => {
                   <TooltipContent>Save All (Ctrl+Shift+S)</TooltipContent>
                 </Tooltip>
 
+                <ToggleAI 
+                  isEnabled={false}
+                  onToggle={()=>{}}
+                  suggestionLoading={true}
+                />
                 <Button variant="default" size="icon">
                   <Bot className="size-4" />
                 </Button>
