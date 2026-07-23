@@ -44,10 +44,10 @@ import { MarkedToggleButton } from "./marked-toggle";
 
 
 interface ProjectTableProps {
-  projects: Project[]
+  projects: any[]
   onUpdateProject?: (id: string, data: { title: string; description: string }) => Promise<void>
   onDeleteProject?: (id: string) => Promise<void>
-  onDuplicateProject?: (id: string) => Promise<void>
+  onDuplicateProject?: (id: string) => Promise<any>
   onMarkasFavorite?: (id: string) => Promise<void>
 }
 

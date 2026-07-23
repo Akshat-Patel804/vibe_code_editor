@@ -7,6 +7,13 @@ import React from 'react'
 
 const page = async () => {
   const playgrounds = await getAllPlaygroundForUser();
+  
+  // Format the playgrounds data so `description` is never null
+  const formattedPlaygrounds = (playgrounds || []).map((project) => ({
+    ...project,
+    description: project.description ?? "", // converts null to an empty string
+  }));
+
   return (
     <div className='flex flex-col justify-start items-center min-h-screen mx-auto max-w-7xl px-4 py-10'>
       <div className='grid grid-cols-1 sm:grid-cols-2 gap-6 w-full'>
@@ -19,7 +26,7 @@ const page = async () => {
             <EmptyState/>
           ) : (
             <ProjectTable 
-                   projects={playgrounds || []}
+                   projects={playgrounds as any}
                    onDeleteProject={deleteProjectById}
                    onUpdateProject={editProjectById}
                    onDuplicateProject={duplicateProjectById} />
