@@ -10,7 +10,6 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "ignoreDeprecations": "6.0",
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
@@ -31,5 +30,8 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "vibecode-starters"
+  ]
 }
